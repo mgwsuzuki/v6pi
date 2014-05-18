@@ -2,6 +2,6 @@ vp_string
 ====
 
 文字列を数値に変換したり、数値を文字列に変換したりする関数。
-sprintf()やvsnprintf()が_sbrk_r()などの関数に依存していて使えないため作った。
+sprintf()やvsnprintf()が使えればそれでよかったが、_sbrk_r()などの関数に依存していて使えないため作った。
 
 vp_printf(char *format, ...)みたいな関数はまだないが、実装予定ではある。
