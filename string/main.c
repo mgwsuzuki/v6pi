@@ -12,15 +12,27 @@
 #include "vp_uart.h"
 #include "vp_string.h"
 
+static void test_convert();
+static void test_format();
+
 int main(){
+
+  vp_uart_init();
+  vp_uartbuf_init();
+
+  //test_convert();
+  test_format();
+
+  return 0;
+}
+
+void test_convert(){
 
   char strbuf[1024];
   u32_t v;
   char putbuf[1024];
 
-  vp_uart_init();
-  vp_uartbuf_init();
-  vp_uartbuf_put_string("vp_string test\n");
+  vp_uartbuf_put_string("vp_string convert test\n");
 
   while(1){
     vp_uartbuf_task();
@@ -86,6 +98,21 @@ int main(){
       vp_uartbuf_put_string(")\n");
     }
   }
+}
 
-  return 0;
+
+void test_format(){
+
+  char strbuf[1024];
+  i32_t v;
+
+  vp_uartbuf_put_string("vp_string convert test\n");
+
+  while(1){
+    vp_uartbuf_task();
+    if (vp_uartbuf_getline(strbuf) > 0){
+      v = vp_a2i(strbuf);
+      vp_printf("char:%c str:%s dec:%d oct:%o hex:%x bin:%b\n", strbuf, strbuf, v, v, v, v);
+    }
+  }
 }
